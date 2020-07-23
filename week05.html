@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div id="app" class="container">
+        <div class="row">
+            <div class="col-md-8 mx-auto">
+                <validation-observer v-slot="{ invalid }">
+                    <form>
+                        <validation-provider rules="required" v-slot="{ errors, classes }">
+                            <div class="form-group">
+                                <label for="name">姓名</label>
+                                <input class="form-control" :class="classes" type="text" name="姓名" id="text"
+                                    v-model="text">
+                                <span class="invalid-feedback">{{ errors[0] }}</span>
+                            </div>
+                        </validation-provider>
+
+                        <validation-provider rules="required|email" v-slot="{ errors, classes }">
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input class="form-control" :class="classes" type="email" name="Email" id="email"
+                                    v-model="email">
+                                <span class="invalid-feedback">{{ errors[0] }}</span>
+                            </div>
+                        </validation-provider>
+
+                        <validation-provider rules="required|integer" v-slot="{ errors, classes }">
+                            <div class="form-group">
+                                <label for="tel">電話</label>
+                                <input class="form-control" :class="classes" type="tel" name="電話" id="tel"
+                                    v-model="number">
+                                <span class="invalid-feedback">{{ errors[0] }}</span>
+                            </div>
+                        </validation-provider>
+
+                        <validation-provider rules="required" v-slot="{ errors, classes }">
+                            <div class="form-group">
+                                <label for="address">地址</label>
+                                <input class="form-control" :class="classes" type="address" name="地址" id="address"
+                                    v-model="address">
+                                <span class="invalid-feedback">{{ errors[0] }}</span>
+                            </div>
+                        </validation-provider>
+
+                        <validation-provider rules="required" v-slot="{ errors, classes }">
+                            <div class="form-group">
+                                <label for="payfor">付款方式</label>
+                                <select class="form-control" :class="classes" id="payfor" name="付款方式" v-model="payfor">
+                                    <option>WebATM</option>
+                                    <option>ATM</option>
+                                    <option>Barcode</option>
+                                    <option>Credit</option>
+                                    <option>ApplePay</option>
+                                    <option>GooglePay</option>
+                                </select>
+                                <span class="invalid-feedback">{{ errors[0] }}</span>
+                            </div>
+                        </validation-provider>
+
+                        <div class="form-group">
+                            <label for="address">備註</label>
+                            <textarea class="form-control" name="message" id="message" v-model="message" cols="30"
+                                rows="10"></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary" :disabled="invalid">送出</button>
+                    </form>
+                </validation-observer>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- vue -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- vue validate -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vee-validate/3.3.0/vee-validate.full.min.js"></script>
+    <script src="js/all.js"></script>
+    <script type="module">
+        // 匯入語系檔案
+        import zh_TW from './js/zh_TW.js';
+
+        // 加入至 VeeValidate 的設定檔案，語系設定
+        VeeValidate.localize('tw', zh_TW);
+    </script>
+</body>
+
+</html>
